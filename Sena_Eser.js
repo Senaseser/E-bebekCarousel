@@ -1,11 +1,8 @@
 $(function () {
+  const HOMEPAGE_PATH = "/"; //Please enter your homepage url path
 
-  const HOMEPAGE_URL = "/Users/senaeser/Desktop/case/test.html";
-  
   const isHomepage = () => {
-    return (
-      window.location.pathname === HOMEPAGE_URL
-    );
+    return window.location.pathname === HOMEPAGE_PATH;
   };
 
   const init = () => {
@@ -76,12 +73,18 @@ $(function () {
       }
     }
     return `
-    <div class="product-card" data-id="${product.id}" data-product-url="${product.url}">
+    <div class="product-card" data-id="${product.id}" data-product-url="${
+      product.url
+    }">
         <img class="icon" src="https://www.e-bebek.com/assets/images/cok-satan@2x.png" alt="icon" />
-        <span class="fav-icon ${isFavorite ? "favorite" : ""}" >${isFavorite ? "♥" : "♡"}</span>
+        <span class="fav-icon ${isFavorite ? "favorite" : ""}" >${
+      isFavorite ? "♥" : "♡"
+    }</span>
         <img src="${product.img}" alt="${product.name}" />
         <div class="product-info">
-            <h2><span class="product-brand">${product.brand} - </span> ${product.name}</h2>
+            <h2><span class="product-brand">${product.brand} - </span> ${
+      product.name
+    }</h2>
                 <div class="rating">${starsHTML}<span class="rating-text">(${rating})</span>
                 </div>
                 <div class="discount">${discount ? discount : ""}</div>
@@ -145,7 +148,7 @@ $(function () {
   const setFavoriteEvents = () => {
     $("body").on("click", ".fav-icon", function (e) {
       e.stopPropagation();
- 
+
       const card = $(this).closest(".product-card");
       const productId = card.data("id");
 
@@ -452,5 +455,4 @@ $(function () {
   };
 
   init();
-
 });
