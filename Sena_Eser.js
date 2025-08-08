@@ -100,11 +100,7 @@ $(function () {
     if (cachedProducts) {
       try {
         const products = JSON.parse(cachedProducts);
-        let html = "";
-        products.forEach((product) => {
-          html += buildProductHTML(product);
-        });
-        $(".product-list").append(html);
+        renderProducts(products);
       } catch (error) {
         console.log("Error: parsing cached products", error);
         fetchFromAPI();
@@ -124,16 +120,15 @@ $(function () {
           CONFIG.STORAGE_KEY_PRODUCTS,
           JSON.stringify(products)
         );
-
-        let html = "";
-        products.forEach((product) => {
-          html += buildProductHTML(product);
-        });
-        $(".product-list").append(html);
+        renderProducts(products);
       })
       .catch((error) => {
         console.error("Error: fetching data", error);
       });
+  };
+  const renderProducts = (products) => {
+    const html = products.map((product) => buildProductHTML(product)).join("");
+    $(".product-list").html(html);
   };
 
   const setCardDetailEvents = () => {
